@@ -1,0 +1,11 @@
+.closeIcon div{
+    width: 20px;
+    height: 3px;
+    background-color: red;
+  }
+  .closeIcon div:first-child{
+    transform: translateY(1.5px) rotate(45deg);
+  }
+  .closeIcon div:last-child{
+    transform: translateY(-1.5px) rotate(-45deg);;
+  }

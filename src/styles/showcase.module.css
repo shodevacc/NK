@@ -1,0 +1,63 @@
+.container {
+  background: radial-gradient(#525252, #131313);
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+}
+
+.container > h2 {
+  align-self: center;
+  text-align: center;
+}
+
+.image {
+  height: 30rem;
+  width: 30rem;
+
+  justify-self: center;
+
+  align-self: center;
+
+  transform: scale(1.1);
+
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.info {
+  align-self: center;
+  text-align: center;
+}
+@media (min-width: 768px) {
+  .container {
+    background: radial-gradient(#525252, #131313);
+    display: grid;
+    grid-template-columns: 10% repeat(3, minmax(5rem, 1fr)) 10%;
+    grid-template-rows: 1fr 2fr 1fr;
+  }
+  .left {
+    grid-column: 2/3;
+    grid-row: 1/2;
+    align-self: flex-end;
+  }
+  .image {
+    height: 45rem;
+    width: 45rem;
+    grid-column: 3/4;
+    grid-row: 2/3;
+    justify-self: center;
+    align-self: center;
+    object-fit: cover;
+  }
+  .info {
+    grid-row: 3/4;
+    grid-column: 4/5;
+    text-align: left;
+  }
+  .left-bottom {
+    grid-row: 3/4;
+    grid-column: 2/3;
+  }
+}

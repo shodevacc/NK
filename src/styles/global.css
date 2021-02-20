@@ -1,0 +1,195 @@
+/* MAIN FOR WHOLE DOCUMENT */
+
+:root {
+  --main-bg-color: #eaeaea;
+  --Arrow-color: #828282;
+  --Scrollable-background-color: #eaeaea;
+  --Info-Heading-color: #85631a;
+  --Info-text-color: #5e4819;
+  --botton-nav-background: #cecece;
+  --hover-bg: #f9090a;
+  --product-text-color: #fffbcc;
+  --gray: #828282;
+  --light: #f8f9fa;
+  --dlight: #eaeaea;
+  --logo-red: #f9090a;
+  --bg-black: #323232;
+  --text-color: white;
+  --nav-color: #131313;
+
+  --addressList-color: rgb(255, 255, 255);
+  --addressList-hover-color: rgb(212, 200, 200);
+  --selectAddress-button-color: green;
+  --deleteAddress-button-color: red;
+
+  --checkout-circle-border-color: #555;
+}
+
+html {
+  background: var(--dlight);
+  font-size: 50%;
+}
+
+body {
+  margin: 0;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: var(--dlight);
+}
+
+h2 {
+  font-size: 8rem;
+  color: var(--dlight);
+}
+
+h3 {
+  font-size: 3.5rem;
+  color: var(--dlight);
+}
+
+h4 {
+  font-size: 3rem;
+  color: var(--dlight);
+}
+
+h5 {
+  font-size: 2.5rem;
+  color: var(--dlight);
+}
+
+h6 {
+  font-size: 2rem;
+  color: var(--dlight);
+}
+
+label > p {
+  margin: 1rem;
+}
+
+button {
+  cursor: pointer;
+}
+
+p {
+  font-size: 1.8rem;
+  color: var(--dlight);
+}
+
+a {
+  text-decoration: none;
+}
+
+/* EXTRA */
+
+.input-container > p {
+  margin: 0;
+}
+
+.checkoutForm {
+  margin: 0 0 10rem 0;
+}
+
+/* EXTRA */
+
+.text-mute {
+  color: var(--gray);
+  font-size: 1.4rem;
+}
+
+.text-small {
+  font-size: 1rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.hover-image {
+  -webkit-transition: -webkit-transform 0.2s ease;
+  transition: -webkit-transform 0.2s ease;
+  -o-transition: transform 0.2s ease;
+  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, -webkit-transform 0.2s ease;
+}
+
+.hover-image:hover {
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+.logo-red-btn {
+  background-color: var(--logo-red);
+  color: rgb(238, 229, 229);
+  border: none;
+  border-radius: 2rem;
+  padding: 1.4rem 2.5rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 0.2s ease;
+  transition: -webkit-transform 0.2s ease;
+  -o-transition: transform 0.2s ease;
+  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, -webkit-transform 0.2s ease;
+  z-index: 1;
+}
+
+.logo-red-btn:hover {
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+}
+
+.logo-red-btn-disabled {
+  background-color: var(--logo-red);
+  color: rgb(238, 229, 229);
+  opacity: 0.5;
+  border: none;
+  border-radius: 2rem;
+  padding: 1.4rem 2.5rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.dlight-btn {
+  padding: 1.4rem 2.5rem;
+  border-radius: 2rem;
+  background-color: var(--dlight);
+  border: 1px solid black;
+  -webkit-transition: -webkit-transform 0.2s ease;
+  transition: -webkit-transform 0.2s ease;
+  -o-transition: transform 0.2s ease;
+  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, -webkit-transform 0.2s ease;
+}
+
+.dlight-btn:hover {
+  -webkit-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  transform: scale(1.2);
+}
+
+.spinner-container {
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+  margin: auto;
+  height: 100%;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 62.5%;
+  }
+}

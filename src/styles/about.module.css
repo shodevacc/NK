@@ -1,0 +1,131 @@
+.container {
+  background: var(--dlight);
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  /* make 12 columns */
+  grid-template-rows: repeat(1, 1fr);
+  margin-top: 5rem;
+  margin-bottom: 5rem;
+  padding: 0 1rem 0 1rem;
+}
+
+.infoCard {
+  background-color: var(--bg-black);
+  max-height: 80%;
+  border-radius: 1rem;
+  padding: 1rem 1rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+.cardTitle {
+  font-weight: 700;
+  text-transform: uppercase;
+  width: 100%;
+  margin: 2rem;
+}
+
+.cardSubtitle {
+  font-size: 2rem;
+  margin: 0.5rem;
+}
+
+.stackTop h5 {
+  color: var(--light);
+}
+
+.stackTop p {
+  color: var(--light);
+}
+
+.stackTop {
+  grid-column: 2/12;
+  /* start on column 1 and extend for 8 columns */
+  grid-row: 1;
+  /* start on row 1 */
+  z-index: 2;
+  opacity: 0.9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.stackBottom {
+  grid-column: 1/ -1;
+  /* Start at column 4 and extend till end */
+  grid-row: 1;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.stackBottom img {
+  border-radius: 1.5rem;
+}
+
+.InfoBackgroundHeight {
+  height: 42rem;
+  width: 100%;
+}
+
+@media (min-width: 578px) {
+  .stackTop {
+    grid-column: 3/-3;
+  }
+  .stackBottom {
+    grid-column: 2/ -2;
+  }
+  .InfoBackgroundHeight {
+    height: 36em;
+  }
+}
+
+@media (min-width: 768px) {
+  .stackTop {
+    -ms-grid-column: 2;
+    -ms-grid-column-span: 6;
+    grid-column: 2/8;
+    /* start on column 1 and extend for 8 columns */
+    opacity: 1;
+  }
+  .stackBottom {
+    grid-column: 4/ -2;
+    /* Start at column 4 and extend till end */
+    -ms-grid-row: 1;
+    grid-row: 1;
+    z-index: 1;
+  }
+  .InfoBackgroundHeight {
+    height: 39rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .stackTop {
+    -ms-grid-column: 2;
+    -ms-grid-column-span: 5;
+    grid-column: 2/7;
+  }
+  .InfoBackgroundHeight {
+    height: 40rem;
+  }
+}
+@media (min-width: 1200px) {
+  .stackTop {
+    -ms-grid-column: 2;
+    -ms-grid-column-span: 4;
+    grid-column: 2/6;
+  }
+  .InfoBackgroundHeight {
+    height: 45rem;
+  }
+}

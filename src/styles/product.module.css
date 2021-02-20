@@ -1,0 +1,231 @@
+.container {
+  display: flex;
+
+  flex-direction: column;
+  background: var(--dlight);
+
+  justify-content: center;
+
+  align-items: center;
+  position: relative;
+  padding-top: 4rem;
+  padding-bottom: 0;
+}
+
+.container > * {
+  color: black;
+}
+
+.wave {
+  position: absolute;
+  bottom: 3%;
+  width: 200vw;
+  opacity: 0.9;
+  z-index: 2;
+  animation: flow linear 25s infinite;
+}
+.wave1 {
+  position: absolute;
+  bottom: 12%;
+  width: 200vw;
+  opacity: 0.7;
+  z-index: 1;
+  /* display: none; */
+  animation: flow1 linear 10s infinite;
+}
+.wave2 {
+  /* display: none; */
+  position: absolute;
+  bottom: 18%;
+  width: 200vw;
+  opacity: 0.5;
+  z-index: 0;
+  animation: flow2 linear 5s 0.3s infinite;
+}
+@keyframes flow {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100vw);
+  }
+}
+@keyframes flow1 {
+  0% {
+    transform: translateX(-100vw);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+@keyframes flow2 {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100vw);
+  }
+}
+.arrowContainer {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100vw;
+  z-index: 3;
+}
+.leftArrow {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  height: 10px;
+  width: 35px;
+}
+
+.rightArrow {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  height: 3px;
+  width: 35px;
+}
+.arrow {
+  height: 5px;
+  width: 20px;
+  background-color: black;
+}
+.leftArrow .arrow {
+  background-color: gray;
+}
+.leftArrow .arrow:first-of-type {
+  transform: translate(4px, -3px) rotate(-45deg);
+}
+.leftArrow .arrow:last-of-type {
+  transform: translate(4px, 3px) rotate(45deg);
+}
+.rightArrow .arrow:first-of-type {
+  transform: translate(4px, -3px) rotate(45deg);
+}
+.rightArrow .arrow:last-of-type {
+  transform: translate(4px, 3px) rotate(-45deg);
+}
+
+.showcaseCardInfo {
+  background: var(--dlight);
+  border-radius: 1rem;
+  width: 18rem;
+  height: 18rem;
+}
+
+.showcaseCardInfo > * {
+  color: var(--bg-black);
+  margin: 0;
+  padding-bottom: 1rem;
+}
+
+.showcaseContainer {
+  width: 100vw;
+  overflow: hidden;
+  /* height: 100px; */
+  position: relative;
+}
+.showcaseSliderContainer {
+  width: inherit;
+  height: inherit;
+  overflow: scroll;
+}
+.showcaseCardCollection {
+  display: flex;
+  flex-direction: row;
+  width: 300vw;
+  justify-content: space-evenly;
+}
+.showcaseCard>*{
+  z-index: 3;
+}
+.showcaseCard {
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  align-items: center;
+  text-align: center;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  width: 100vw;
+  z-index: 3;
+}
+
+.showcaseCardInfo > * {
+  color: var(--dlight);
+}
+.showcaseCardInfo {
+  background: var(--bg-black);
+}
+.showcaseCard:nth-child(2n) {
+  background: none;
+}
+.showcaseCard:nth-child(2n + 1) {
+  background: none;
+}
+.showcaseCard:first-child {
+  background: none;
+}
+.showcaseCardImage {
+  height: 15rem;
+  width: 15rem;
+  margin-bottom: 1.5rem;
+}
+
+.showcaseCardImage:hover {
+  animation: mymove 0.1s linear;
+
+  animation-fill-mode: forwards;
+}
+
+@keyframes mymove {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.05);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  75% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1.2);
+  }
+}
+
+@media (min-width: 578px) {
+  .ShowcaseProducts {
+    padding-bottom: 5rem;
+  }
+  .arrowContainer {
+    display: none;
+  }
+  .showcaseCardCollection {
+    flex-direction: row;
+    width: 100vw !important;
+  }
+ 
+}
+
+@media (min-width: 992px) {
+  .wave {
+    bottom: -25%;
+  }
+  .wave1 {
+    bottom: -15%;
+  }
+  .wave2 {
+    bottom: -10%;
+  }
+}
