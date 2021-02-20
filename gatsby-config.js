@@ -1,4 +1,5 @@
 module.exports = {
+  pathPrefix: "/NK",
   siteMetadata: {
     title: `N.K. Catering`,
     description: `Catering order service`,
