@@ -24,6 +24,10 @@
 
   --checkout-circle-border-color: #555;
 }
+* {
+
+  box-sizing: border-box;
+}
 
 html {
   background: var(--dlight);

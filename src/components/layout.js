@@ -8,11 +8,17 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql } from "gatsby"
+// Redux
+import store from "../Redux/store"
+import { Provider } from "react-redux"
 
+import Nav from "./Nav"
+import Footer from "./Footer"
+import SEO from "./seo"
 import Header from "./header"
 // import "./layout.css"
 
-const Layout = ({ children }) => {
+const Layout = ({ children,title }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -24,27 +30,15 @@ const Layout = ({ children }) => {
   `)
 
   return (
-    <>
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
-        <main>{children}</main>
-        <footer
-          style={{
-            marginTop: `2rem`,
-          }}
-        >
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
-        </footer>
-      </div>
-    </>
+    <Provider store={store}>
+       <SEO title={title} />
+       <p style={{ color: "red", textAlign: "center" }} id="alert">
+        **We Currently Only deliver in Bangalore**
+      </p>
+      <Nav />
+      {children}
+      <Footer />
+    </Provider>
   )
 }
 

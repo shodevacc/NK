@@ -3,8 +3,8 @@ import Img from "./HomeImages"
 import styles from "../styles/productCard.module.css"
 import { Link } from "gatsby"
 
-function ProductCard({productInfo}) {
-    console.log("RPUEHFUEF",productInfo)
+function ProductCard({productInfo,circleStyle}) {
+  const isBrowser=typeof window!=='undefined'
   var card = useRef(null)
   var container = useRef(null)
 
@@ -34,7 +34,7 @@ function ProductCard({productInfo}) {
       //For the moving animation
       // Popout effect
       //   title.current.style.transform = `translateZ(150px)`
-      product.style.transform = `translateZ(150px)`
+      product.style.transform = `translateZ(120px)`
       //Popout effect
     }
     // Move on phone
@@ -50,7 +50,7 @@ function ProductCard({productInfo}) {
       card.current.style.transform = `rotateY(${-xAxis / 10}deg) rotateX(${
         yAxis / 10
       }deg)`
-      product.style.transform = `translateZ(150px)`
+      product.style.transform = `translateZ(120px)`
       //   console.log(e.changedTouches[0].pageX, e.changedTouches[0].pageY)
     }
 
@@ -87,22 +87,22 @@ function ProductCard({productInfo}) {
 
     // Disable any delay in movement of card on start
     container.current.addEventListener("mouseenter", handleMouseEnter)
-    container.current.addEventListener("touchstart", handleTouchStart)
+    card.current.addEventListener("touchstart", handleTouchStart)
     //Add moving functionality to card
     container.current.addEventListener("mousemove", handleMouseMove)
-    container.current.addEventListener("touchmove", handleTouchMove)
+    card.current.addEventListener("touchmove", handleTouchMove)
     //Reset card to initial pos
     container.current.addEventListener("mouseleave", handleLeave)
-    container.current.addEventListener("touchend", handleTouchEnd)
+    card.current.addEventListener("touchend", handleTouchEnd)
     return () => {
       container.current.removeEventListener("mouseenter", handleMouseEnter)
-      container.current.removeEventListener("touchstart", handleTouchStart)
+      card.current.removeEventListener("touchstart", handleTouchStart)
 
       container.current.removeEventListener("mousemove", handleMouseMove)
-      container.current.removeEventListener("touchmove", handleTouchMove)
+      card.current.removeEventListener("touchmove", handleTouchMove)
 
       container.current.removeEventListener("mouseleave", handleLeave)
-      container.current.removeEventListener("touchend", handleTouchEnd)
+      card.current.removeEventListener("touchend", handleTouchEnd)
     }
   }, [])
   // console.log("CArd ref",card.current)
@@ -150,17 +150,17 @@ function ProductCard({productInfo}) {
     )
   }
   return (
-    <div className={styles.mainContainer}>
-      <Waves />
+    <div>
+      {/* <Waves /> */}
 
       <div ref={container} className={styles.container}>
         <div ref={card} className={styles.card}>
           <div className={styles.product}>
-            <div className={styles.circle}></div>
+            <div style={circleStyle} className={styles.circle}></div>
             <Img className={styles.img} src={productInfo.src} />
           </div>
           <div className={styles.info}>
-            <h3 ref={title}>{productInfo.title}</h3>
+            <h3 ref={title} style={{color:"white"}}>{productInfo.title}</h3>
             <p>{productInfo.info}</p>
             <p style={{ color: "red" }}>₹{productInfo.price}</p>
             <p><Link className={styles.order} to={productInfo.link}>Order Now</Link></p>

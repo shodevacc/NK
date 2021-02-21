@@ -9,6 +9,8 @@
 }
 
 .container > h2 {
+  color: white;
+  text-shadow: none;
   align-self: center;
   text-align: center;
 }

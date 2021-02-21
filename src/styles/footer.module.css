@@ -1,0 +1,45 @@
+.container {
+  background: black;
+}
+
+.content {
+  width: 80%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 10vh;
+  padding-bottom: 2rem;
+}
+
+.left {
+  display: flex;
+  flex: 3;
+}
+
+.right {
+  flex: 1;
+  color: white;
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.right > li {
+  height: 2rem;
+  width: 2rem;
+}
+
+.facebook {
+  fill: white;
+}
+
+@media (min-width: 768px) {
+  .content {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}

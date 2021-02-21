@@ -31,7 +31,7 @@ function Showcase() {
   }, [])
   return (
     <div className={styles.container}>
-      <h2 className={styles.left}>Nk.</h2>
+      <h2 className={styles.left}>N.K.</h2>
       {imageSources[sourceIndex]}
       {/* <img
         id="showcase-image"
