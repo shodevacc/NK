@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack:///./src/pages/mutton.js"],"names":["mutton"],"mappings":"6FAAA,gCAUeA,UARf,WACI,OACI","file":"component---src-pages-mutton-js-1e079bcbd498c56738cc.js","sourcesContent":["import React from 'react'\n\nfunction mutton() {\n    return (\n        <div>\n            MUTTON BIRYANI\n        </div>\n    )\n}\n\nexport default mutton\n"],"sourceRoot":""}

@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[8],{"9U3v":function(n,e,t){"use strict";t.r(e);var u=t("q1tI"),a=t.n(u);e.default=function(){return a.a.createElement("div",null,"MUTTON BIRYANI")}}}]);
-//# sourceMappingURL=component---src-pages-mutton-js-1e079bcbd498c56738cc.js.map
