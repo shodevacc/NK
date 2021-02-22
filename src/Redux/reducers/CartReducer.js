@@ -1,136 +1,79 @@
-import { getItem, checkItem, removeItem } from '../../components/LocalStorage'
 import {
-    ADD_ITEM_START, ADD_ITEM_SUCCESS, ADD_ITEM_FAIL,
-    UPDATE_ITEM_START, UPDATE_ITEM_SUCCESS, UPDATE_ITEM_FAIL,
-    DELETE_ITEM_START, DELETE_ITEM_SUCCESS, DELETE_ITEM_FAIL,
-    GET_ITEM_START, GET_ITEM_SUCCESS, GET_ITEM_FAIL, EMPTY_CART,AUTH_LOGOUT
-} from '../actions/types'
+  setItem,
+  getItem,
+  checkItem,
+  removeItem,
+} from "../../components/LocalStorage"
+import { ADD_ITEM, DEL_ITEM, UPDATE_ITEM } from "../actions/types"
 
 const products = () => {
-    if (checkItem("CartProducts")) {
-        return (getItem("CartProducts", true))
-    }
-    else {
-        return ([])
-    }
+  if (checkItem("CartProducts")) {
+    // console.log("CHECKING ITEMS TRUE")
+    //Check if CartProducts are in localstorage
+    return getItem("CartProducts", true) //If true return the CartPRoducts
+  } else {
+    return [] //Else return empty
+  }
+}
+
+const storeCart = (key, value) => {
+  //Store cartProducts in localstorage
+  // console.log("STORING", key, value)
+  setItem(key, JSON.stringify(value))
 }
 
 const initialState = {
-    CartError: null,
-    CartLoading: false,
-    CartProducts: products()
-
+  CartError: null,
+  CartLoading: false,
+  CartProducts: products(),
 }
 
 const CartReducer = (state = initialState, action) => {
-    switch (action.type) {
-        case ADD_ITEM_SUCCESS:
-            const newItem = action.payload[0]
-            return {
-                CartLoading: false,
-                CartError: null,
-                CartProducts: [...state.CartProducts, newItem]
-            }
-        case ADD_ITEM_START:
-            return {
-                ...state,
-                CartLoading: true,
-            }
-        case ADD_ITEM_FAIL:
-            return {
-                ...state,
-                CartLoading: false,
-                CartError: action.payload,
-            }
-        case UPDATE_ITEM_SUCCESS:
-            if (action.payload.quantity > 0) {
-                return {
-                    CartLoading: false,
-                    CartError: null,
-                    CartProducts: state.CartProducts.map((item) => {
-                        if (item.id == action.payload.id) {
-                            return ({ ...item, quantity: action.payload.quantity, price: action.payload.quantity * (item.price / item.quantity) })
-                        }
-                        else {
-                            return item;
-                        }
+  switch (action.type) {
+    case ADD_ITEM:
+      // console.log("Add item", action.payload)
+      let newProductList = [...state.CartProducts, action.payload]
+      storeCart("CartProducts", newProductList)
+      return {
+        CartLoading: false,
+        CartError: null,
+        CartProducts: newProductList,
+      }
+    case DEL_ITEM:
+      let delProductList = state.CartProducts.filter(
+        item => item.id != action.payload
+      )
+      storeCart("CartProducts", delProductList)
+      return {
+        CartProducts: delProductList,
+        CartLoading: false,
+        CartError: null,
+      }
+    case UPDATE_ITEM:
+      let updatedProductList = state.CartProducts.map(item => {
+        //If the item to be updated is found
+        if (item.id == action.payload.id) {
+          return {
+            ...item,
+            weight: action.payload.newWeight, //Update its quantity
+            price: action.payload.newPrice, //Update its price
+          }
+        } else {
+          //If it is some other item then simply return the item unchanged
+          return item
+        }
+      })
+      //   console.log("UPDATING",updatedProductList)
+      storeCart("CartProducts", updatedProductList)
+      return {
+        CartLoading: false,
+        CartError: null,
+        CartProducts: updatedProductList,
+      }
 
-                    })
-                }
-            }
-            else {
-                return state
-            }
-
-        case UPDATE_ITEM_START:
-            return {
-                ...state,
-                CartLoading: true,
-            }
-        case UPDATE_ITEM_FAIL:
-            return {
-                ...state,
-                CartLoading: false,
-                CartError: action.payload,
-            }
-
-        case DELETE_ITEM_START:
-            return {
-                ...state,
-                CartLoading: true,
-            }
-        case DELETE_ITEM_FAIL:
-            return {
-                ...state,
-                CartLoading: false,
-                CartError: action.payload,
-            }
-        case DELETE_ITEM_SUCCESS:
-            return {
-                CartProducts: state.CartProducts.filter((item) => item.id != action.payload),
-                CartLoading: false,
-                CartError: null
-            }
-        case GET_ITEM_START:
-            return {
-                ...state,
-                CartLoading: true,
-            }
-        case GET_ITEM_FAIL:
-            return {
-                ...state,
-                CartLoading: false,
-                CartError: action.payload,
-            }
-        case GET_ITEM_SUCCESS:
-            return {
-                CartError: null,
-                CartLoading: false,
-                CartProducts: action.payload.map(items => {
-                    return {
-                        id:items.product.id,
-                        title: items.product.title,
-                        quantity: items.quantity,
-                        weight: items.weight,
-                        serves:items.product.serves,
-                        category:items.product.category,
-                        price:items.price
-                    }
-                })
-            }
-        case EMPTY_CART:
-            removeItem("CartProducts");
-            return {
-                ...state,
-                CartProducts: []
-            }
-        
-        case AUTH_LOGOUT:
-            return initialState
-
-        default: return state
-
-    }
+    default:
+      return state
+  }
 }
 
 export default CartReducer

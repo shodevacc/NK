@@ -13,6 +13,7 @@ export const removeItem = (name) => {
     isBrowser&&localStorage.removeItem(name)
 }
 export const checkItem = (name,checkParsedLength=false) => {
+
     const item = isBrowser&&localStorage.getItem(name,checkParsedLength)
     // if it doesnt exist
     if (item == null || (JSON.parse(item)) == null || item.length == 0 || (checkParsedLength && (JSON.parse(item).length)==0) ) {

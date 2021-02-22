@@ -3,12 +3,15 @@ import Buy from "../components/Buy"
 import Layout from "../components/layout"
 
 function mutton() {
+
     var data = {
+        id:1,
         title: "Mutton Biryani",
-        price: 100,
+        basePrice: 200,
         description: "This is the mutton biryani",
         minimumWeight:3,
-        src:"mutton"
+        src:"mutton",
+        link:"/mutton"
       }
   return (
       <Layout title="mutton biryani">

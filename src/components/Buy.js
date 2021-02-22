@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react"
 import { useSelector, useDispatch } from "react-redux"
+import { AddItem, UpdateItem } from "../Redux/actions/CartActions"
 // import { addCartProduct, UpdateItem } from '../Redux/actions/CartActions'
 // import { BuyImage } from "../../Images"
 import Img from "./BuyImages"
@@ -7,13 +8,16 @@ import { ToggleCart } from "../Redux/actions/ToggleCart"
 import styles from "../styles/buy.module.css"
 
 export default function Buy({ pk, category, src, data }) {
-  console.log("RENDERING Buy")
+
   const selectRef = useRef(null)
   const cart = useSelector(state => state.cart)
   // const quantity=useState(3)
+  const isBrowser=typeof window !== 'undefined'
   const dispatch = useDispatch()
   var addItem = true //Check if whether to update or add item
-  const FilterCartProduct = cart.CartProducts.filter(prod => prod.id == pk)
+  //Check if the product is already in the cart
+  const FilterCartProduct =isBrowser&& cart.CartProducts.filter(prod => prod.id == data.id)
+  // console.log("FILTERED",FilterCartProduct, Array.isArray(cart.CartProducts))
   const CurrentProduct = {
     title: "chicken",
     weight: "500",
@@ -22,27 +26,24 @@ export default function Buy({ pk, category, src, data }) {
     category: "CHICKEN",
   }
   //   const CurrentProduct = product.products.filter(item => item.id == pk)[0]
-  var initialState = 3
+  var initialState = data.minimumWeight
   if (cart.CartProducts.length > 0 && FilterCartProduct.length > 0) {
     //if product exists in cart
     addItem = false
-    initialState = FilterCartProduct[0].quantity
-  } else {
-    initialState = 1
+    initialState = FilterCartProduct[0].weight
   }
-  const [quantity, setQuantity] = useState(3)
+  const [weight, setWeight] = useState(initialState)
 
   const SubmitButton = () => {
-    if (
-      FilterCartProduct.length > 0 &&
-      quantity == FilterCartProduct[0].quantity
-    ) {
+    if (FilterCartProduct.length > 0 && weight == FilterCartProduct[0].weight) {
+      console.log("ITEMS ARE NOT CHANGED")
       return (
         <button className="logo-red-btn-disabled" type="submit">
           No Changes
         </button>
       )
     } else {
+      console.log("ITEMS ARE CHANGED", FilterCartProduct)
       return (
         <input
           onClick={event => handleSubmit(event)}
@@ -61,25 +62,33 @@ export default function Buy({ pk, category, src, data }) {
     event.stopPropagation()
 
     if (addItem) {
-      const info = {
-        id: Number(CurrentProduct.id),
-        title: CurrentProduct.title,
-        quantity: quantity,
-        weight: CurrentProduct.weight,
-        serves: CurrentProduct.serves,
-        category: CurrentProduct.category,
-        price: quantity * CurrentProduct.price,
+      //Check if item needs to be updaed or added
+      let info = {
+        ...data,
+        weight: parseInt(weight),
+        price: parseInt(
+          ((weight * data.basePrice) / data.minimumWeight).toFixed(2)
+        ),
       }
+      dispatch(AddItem(info))
       //   dispatch(addCartProduct([info]))
       dispatch(ToggleCart())
     } else {
-      //   dispatch(UpdateItem(Number(CurrentProduct.id), quantity))
+      let info = {
+        id: data.id,
+        newWeight: weight,
+        newPrice: parseInt(
+          ((weight * data.basePrice) / data.minimumWeight).toFixed(2)
+        ),
+      }
+      dispatch(UpdateItem(info))
       dispatch(ToggleCart())
     }
   }
 
+  //When new weight is selected
   const handleChange = e => {
-    setQuantity(parseInt(selectRef.current.value))
+    setWeight(parseInt(selectRef.current.value))
   }
   const CartProducts = () => {
     if (cart.CartLoading) {
@@ -103,25 +112,24 @@ export default function Buy({ pk, category, src, data }) {
                   <p>
                     <b style={{ color: "#f9090a" }}>
                       MRP: ₹
-                      {((quantity * data.price) / data.minimumWeight).toFixed(
+                      {((weight * data.basePrice) / data.minimumWeight).toFixed(
                         2
                       )}
                     </b>{" "}
-                  </p>
-                  <p>
-                    <b>Net: {data.weight} kg</b>{" "}
                   </p>
                 </div>
 
                 <div className={styles.productAddForm}>
                   <form onSubmit={() => handleSubmit()}>
-                    <label for="weight">Net Weight</label>
+                    <label htmlFor="weight">
+                      <b>Net Weight:</b>
+                    </label>
                     <select
                       onChange={e => handleChange(e)}
                       ref={selectRef}
                       name="weight"
                       id="weight"
-                      value={quantity}
+                      value={weight}
                     >
                       <option value="3">3kg</option>
                       <option value="4">4kg</option>

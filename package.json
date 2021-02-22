@@ -32,13 +32,14 @@
   "license": "0BSD",
   "scripts": {
     "build": "gatsby build",
-    "develop": "gatsby develop",
+    "develop": "gatsby clean && gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
-    "deploy": "gatsby build --prefix-paths && gh-pages -b gh-pages -d public"
+    "deploy": "gatsby clean && gatsby build --prefix-paths && gh-pages -b gh-pages -d public",
+    "git":"git add . && git commit -m \"changes\" && git push "
   },
   "repository": {
     "type": "git",
@@ -48,4 +49,3 @@
     "url": "https://github.com/gatsbyjs/gatsby/issues"
   }
 }
- 

@@ -1,5 +1,6 @@
 import React from "react"
-import { Close,EmptyCart } from "./HomeImages"
+import { Close, EmptyCart } from "./HomeImages"
+import Img from "./BuyImages"
 // import { EmptyCart, Close } from '../SVG'
 import { useSelector, useDispatch } from "react-redux"
 import { useSpring, animated } from "react-spring"
@@ -10,6 +11,8 @@ import styles from "../styles/cart.module.css"
 
 // import { delCartProducts } from '../Redux/actions/CartActions'
 import { ToggleCart } from "../Redux/actions/ToggleCart"
+import { DelItem } from "../Redux/actions/CartActions"
+import { Link } from "gatsby"
 
 export default function Cart() {
   const ToggleState = useSelector(state => state.togglecart.toggle)
@@ -20,28 +23,22 @@ export default function Cart() {
     },
   })
 
-    const dispatch = useDispatch()
+  const dispatch = useDispatch()
   const cart = useSelector(state => state.cart)
   const GST = useSelector(state => state.products.tax)
   // console.log("GST", GST)
   //Scroll to products
-    const handleRedirect = () => {
-      dispatch(ToggleCart())
-      window.location.href = "/#OurProducts"
-    }
+  const handleRedirect = () => {
+    dispatch(ToggleCart())
+    window.location.href = "/#OurProducts"
+  }
 
-  //   const handleDelete = id => {
-  //     dispatch(delCartProducts(id))
-  //   }
+    const handleDelete = id => {
+      dispatch(DelItem(id))
+    }
   var total = 0
   const CartContent = () => {
-    if (cart.CartLoading) {
-      console.log("Loading")
-      //   return <Spinner height="10rem" width="10rem" />
-    } else if (cart.CartError) {
-      console.log("ERROR")
-      // return <Error error={cart.CartError} />
-    } else if (cart.CartProducts.length > 0) {
+ if (cart.CartProducts.length > 0) {
       return (
         <animated.div
           style={{
@@ -49,44 +46,33 @@ export default function Cart() {
             flexDirection: "column",
             justifyContent: "space-evenly",
             alignItems: "center",
+            width:"100%"
           }}
         >
           {cart.CartProducts.map((item, index) => {
             total += item.price
             return (
               <div key={item.id} className={styles.cartCard}>
-                <a href={`/order/${item.id}/`}>
+                <Link onClick={()=>{dispatch(ToggleCart())}} to={item.link}>
                   <div className={styles.cartCardImg}>
-                    {/* <CartProductIcon
-                      category={item.category}
-                      title={item.title}
-                      height="15rem"
-                      width="15rem"
-                    /> */}
+                    <Img
+                      style={{ height: "15rem", width: "15rem" }}
+                      src={item.src}
+                    />
                   </div>
-                </a>
+                </Link>
                 <div className={styles.cartCardInfo}>
                   <div
                     className={styles.cartCardClose}
-                    // onClick={() => handleDelete(item.id)}
+                    onClick={() => handleDelete(item.id)}
                     style={{ cursor: "pointer" }}
                   >
                     <Close height="1.5rem" width="1.5rem" color="red" />
                   </div>
                   <h6>{item.title}</h6>
-                  <p className="text-mute">{item.category}</p>
-                  <p style={{ color: "red" }}>
-                    ₹{item.price}{" "}
-                    <span className="text-mute">
-                      ({item.quantity} ×{item.price / item.quantity})
-                    </span>
-                  </p>
-                  <p>Qty: {item.quantity}</p>
-                  <p>
-                    Net: {item.weight * item.quantity}g ({item.weight}×
-                    {item.quantity})
-                  </p>
-                  <p>Serves: {item.serves}</p>
+                  <p style={{ color: "red" }}>MRP: ₹{item.price} </p>
+                  <p>Net: {item.weight}kg</p>
+                  {/* <p>Serves: {item.serves}</p> */}
                 </div>
               </div>
             )
@@ -128,7 +114,7 @@ export default function Cart() {
             flexDirection: "column",
             justifyContent: "space-evenly",
             alignItems: "center",
-            width:"100%",
+            width: "100%",
           }}
         >
           <h5 style={{ textAlign: "center", color: "black" }}>

@@ -18,13 +18,12 @@ export default function TestNav() {
   const dispatch = useDispatch()
 
   const ToggleState = useSelector(state => state.togglecart.toggle)
-  const [innerWidth, setInnerWidth] = useState(100)
   const [toggleDrop, setToggleDrop] = useState(false)
   // setCollapse()
   const [collapse, setCollapse] = useState(
     isBrowser ? (window.innerWidth > 786 ? false : true) : false
   )
-  console.log("COLLAPSE STATE", collapse)
+  // console.log("COLLAPSE STATE", collapse)
   const NavItems = ({ style, buttonStyle, className }) => {
     return (
       <ul className={`${styles.navList} ${className}`}>
@@ -96,7 +95,7 @@ export default function TestNav() {
 
   const cartAnimation = useSpring({
     width:
-      isBrowser && ToggleState ? `${innerWidth * (3 / 20) + 260}px` : "0px",
+      isBrowser && ToggleState ? `${window.innerWidth * (3 / 20) + 260}px` : "0px",
     from: {
       width: "0px",
     },
@@ -105,7 +104,6 @@ export default function TestNav() {
   // React Spring styling
   isBrowser &&
     (window.onresize = () => {
-      setInnerWidth(window.innerWidth)
       if (!collapse && window.innerWidth <= 786) {
         setCollapse(true)
         setToggleDrop(false)

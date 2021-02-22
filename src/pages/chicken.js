@@ -4,11 +4,13 @@ import Layout from "../components/layout"
 
 function chicken() {
   var data = {
+    id:0,
     title: "Chicken Biryani",
-    price: 100,
+    basePrice: 100,
     description: "This is the chicken biryani",
     minimumWeight:3,
-    src:"chicken"
+    src:"chicken",
+    link:"/chicken"
   }
   return (
     <Layout title="chicken biryani">

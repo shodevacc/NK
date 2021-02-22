@@ -1,5 +1,5 @@
-:root{
-    --buyHeight:calc(100vw * 0.55);
+:root {
+  --buyHeight: calc(100vw * 0.55);
 }
 
 .container {
@@ -32,6 +32,7 @@
   flex-basis: 50%;
   background: var(--bg-black);
   width: 100%;
+  text-align: center;
 }
 
 .productAddForm {
@@ -45,7 +46,11 @@
   width: 100%;
   padding-bottom: 1rem;
 }
-
+.productAddForm label{
+  font-size: 1.8rem;
+  color: var(--dlight);
+  margin: 1rem;
+}
 .productButtonGroup > * {
   display: inline;
   border: none;
@@ -87,13 +92,13 @@
   }
   .productFlexImage {
     flex-basis: 65%;
-    height:var(--buyHeight);
+    height: var(--buyHeight);
   }
   .productFlexInfo {
     flex-basis: 35%;
     background: var(--bg-black);
-    height:var(--buyHeight);
-    text-align: center;
+    height: var(--buyHeight);
+    
   }
   /* .cardHeader {
     margin: 0 0 0 0;

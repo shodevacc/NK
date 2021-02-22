@@ -70,6 +70,7 @@
   right: 0;
   justify-content: flex-start;
   overflow: scroll;
+  z-index: 4;
   /* width:  calc((100vw*0.15) + 260px); */
 }
 
