@@ -31,6 +31,7 @@
 .info {
   align-self: center;
   text-align: center;
+  font-family: royal1;
 }
 @media (min-width: 768px) {
   .container {

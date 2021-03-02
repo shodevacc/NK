@@ -24,6 +24,14 @@
 
   --checkout-circle-border-color: #555;
 }
+@font-face {
+  font-family: royal;
+  src: url('./SCRIPTIN.ttf');
+}
+@font-face {
+  font-family: royal1;
+  src: url('./black.ttf');
+}
 * {
 
   box-sizing: border-box;
@@ -46,6 +54,7 @@ h1 {
 h2 {
   font-size: 8rem;
   color: var(--dlight);
+  font-family: royal1;
 }
 
 h3 {

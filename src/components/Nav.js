@@ -33,9 +33,9 @@ export default function TestNav() {
           </Link>
         </li>
         <li>
-          <a style={style || { color: "white" }} href="/#OurProducts">
-            <p>View Products</p>
-          </a>
+        <Link style={style || { color: "white" }} to="/#OurProducts">
+        <p>View Products</p>
+        </Link>
         </li>
         <li>
           <button

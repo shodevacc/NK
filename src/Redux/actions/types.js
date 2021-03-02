@@ -1,8 +1,11 @@
 //Payment
-export const GET_PAYMENT_START="GET_PAYMENT_START"
-export const GET_PAYMENT_SUCCESS="GET_PAYMENT_SUCCESS"
-export const GET_PAYMENT_FAIL="GET_PAYMENT_FAIL"
-export const PAYMENT_SUCCESS="PAYMENT_SUCCESS"
+export const PAYMENT_PROCESS_START="PAYMENT_PROCESS_START"
+export const PAYMENT_PROCESS_SUCCESS="PAYMENT_PROCESS_SUCCESS"
+
+//GetForm
+export const GetForm_Start="GetForm_Start"
+export const GetForm_Success="GetForm_Success"
+export const GetForm_Fail="GetForm_Fail"
 
 export const CASH_ON_DELIVERY_START="CASH_ON_DELIVERY_START"
 export const CASH_ON_DELIVERY_SUCCESS="CASH_ON_DELIVERY_SUCCESS"

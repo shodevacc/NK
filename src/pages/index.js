@@ -1,7 +1,7 @@
 import React from "react"
 import Showcase from "../components/Showcase"
 import About from "../components/About"
-
+import Intro from '../components/Intro'
 import ProductList from "../components/ProductList"
 
 import Layout from "../components/layout"
@@ -28,11 +28,13 @@ const IndexPage = () => {
   return (
     <Layout title="Home">
       <Showcase />
+      <About />
+      <Intro/>
       <ProductList products={products} />
       {/* <ProductCard productInfo={products.chicken} />
         <ProductCard productInfo={products.mutton} /> */}
       {/* <Products products={products} /> */}
-      <About />
+    
     </Layout>
   )
 }

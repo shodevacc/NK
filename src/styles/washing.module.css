@@ -1,0 +1,24 @@
+.left {
+    animation: moveLeft 2s ease-out infinite alternate;
+  }
+  
+  @keyframes moveLeft {
+    0% {
+      transform: translate3d(0px, 0px, 0px);
+    }
+    100% {
+      transform: translate3d(40px, -40px, 0);
+    }
+  }
+  .right {
+    animation: moveRight 2s ease-out infinite alternate;
+  }
+  
+  @keyframes moveRight {
+    0% {
+      transform: translate3d(0px, -15px, 0px);
+    }
+    100% {
+      transform: translate3d(0px, -8px, 0);
+    }
+  }

@@ -42,13 +42,14 @@ function ProductList({ products }) {
       </div>
     )
   }
+
   return (
-    <div className={styles.container}>
+    <div id="OurProducts" className={styles.container}>
       <h2>Our Products</h2>
       <div className={styles.products}>
         <div style={{ position: "relative" }}>
           <h3>Chicken</h3>
-          <ProductCard productInfo={products.chicken} />
+          <ProductCard dir={1} productInfo={products.chicken} />
           <div className={styles.smallScreen}>
           <Wave />
           </div>
@@ -57,6 +58,7 @@ function ProductList({ products }) {
         <div style={{ position: "relative" }}>
           <h3>Mutton</h3>
           <ProductCard
+         dir={-1}
             circleStyle={{
               background: `linear-gradient( to right, rgb(210 10 12) , rgb(76 14 16))`,
             }}

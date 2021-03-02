@@ -1,77 +1,41 @@
 import {
-    GET_PAYMENT_START, GET_PAYMENT_SUCCESS, GET_PAYMENT_FAIL,
-    CASH_ON_DELIVERY_START, CASH_ON_DELIVERY_SUCCESS, CASH_ON_DELIVERY_FAIL
-} from './types'
+    PAYMENT_PROCESS_START,
+    PAYMENT_PROCESS_SUCCESS,
 
-import axios from 'axios'
+} from "./types"
 
-export const GetPaymentStart = () => {
-    return {
-        type: GET_PAYMENT_START
-    }
+//Accept form data and process the signature and get all the hidden form details
+export const PaymentStart = (formData) => {
+  return {
+    type: PAYMENT_PROCESS_START,
+    payload:formData
+  }
 }
-export const GetPaymentSuccess = (details) => {
-    return {
-        type: GET_PAYMENT_SUCCESS,
-        payload: details
-    }
-}
-
-export const GetPaymentFail = (error) => {
-    return {
-        type: GET_PAYMENT_FAIL,
-        payload: error
-    }
-}
-export const CashOnDeliveryStart = () => {
-    return {
-        type: CASH_ON_DELIVERY_START
-    }
-}
-export const CashOnDeliverySuccess = () => {
-    return {
-        type: CASH_ON_DELIVERY_SUCCESS
-    }
-}
-export const CashOnDeliveryFail = () => {
-    return {
-        type: CASH_ON_DELIVERY_FAIL
-    }
+//Dispatch after all values are got
+export const PaymentSuccess = () => {
+  return {
+    type: PAYMENT_PROCESS_SUCCESS
+  }
 }
 
-export const GetPaymentInfo = (token) => {
-    return dispatch => {
-        dispatch(GetPaymentStart())
-        axios.post(`${process.env.REACT_APP_BASE_URL}api/checkoutform/`, {}, {
-            headers: {
-                'Authorization': `Token ${token}`,
-            }
+// export const GetPaymentFail = error => {
+//   return {
+//     type: GET_PAYMENT_FAIL,
+//     payload: error,
+//   }
+// }
+
+//Wrap PayemntStart in a Promise to make sure PaymentSuccess is dispacthed only after this guy is done executing
+const Process=(formData,dispatch)=>new Promise((resolve,reject)=>{
+    dispatch(PaymentStart(formData))
+    resolve();
+})
+
+export const ProcessPayment=(formData)=>{
+    return dispatch=>{
+        Process(formData,dispatch).then(()=>{
+            //After the processing is done dispatch Success action
+            dispatch(PaymentSuccess())
         })
-            .then(response => {
-                dispatch(GetPaymentSuccess(response.data))
-            })
-            .catch(error => {
-                dispatch(GetPaymentFail(error.message))
-            })
     }
 }
-
-export const CashOnDelivery = (token) => {
-    return dispatch => {
-        dispatch(CashOnDeliveryStart())
-        axios.post(`${process.env.REACT_APP_BASE_URL}api/COD/`, {}, {
-            headers: {
-                'Authorization': `Token ${token}`,
-            }
-        })
-            .then(response => {
-                dispatch(CashOnDeliverySuccess(response.data));
-                window.location.replace("/paymentdone/");
-            })
-            .catch(error => {
-                dispatch(CashOnDeliveryFail(error.message))
-                window.location.href="/paymentdone/";
-            })
-    }
-}
-

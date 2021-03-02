@@ -1,13 +1,14 @@
 import React from "react"
-import Buy from "../components/Buy"
 import Layout from "../components/layout"
+import CashFree from "../components/CashFree"
 
-function checkout() {
-    return (
-       <Layout title="checkout">
+function Checkout() {
 
-       </Layout>
-    )
+  return (
+    <Layout title="checkout">
+        <CashFree/>
+    </Layout>
+  )
 }
 
-export default checkout
+export default Checkout
