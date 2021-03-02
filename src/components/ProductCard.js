@@ -6,7 +6,10 @@ import { Link } from "gatsby"
 function ProductCard({ productInfo, circleStyle, dir }) {
   var card = useRef(null)
   var container = useRef(null)
-  const [scrollMove, setScrollMove] = useState(true)
+  const [scrollMove, setScrollMove] = useState({
+    state: true,
+    setPointer: true,
+  })
   var title = useRef(null)
   var description = useRef(null)
   useEffect(() => {
@@ -24,16 +27,20 @@ function ProductCard({ productInfo, circleStyle, dir }) {
       var CurrentContainer = container.current
       var CurrentCard = card.current
       var containerDetails = CurrentContainer.getBoundingClientRect()
-      if (scrollMove && window.innerHeight * 0.4 > containerDetails.top) {
-        //Move the card
+      //Disable all events that will interfere
+      if (scrollMove.setPointer) {
+        //Check if pointer need to be set to null
+        Object.assign(CurrentContainer.style, { pointerEvents: "none" })
         Object.assign(CurrentCard.style, {
           transition: "all 0.4s ease",
           pointerEvents: "none",
         })
-        Object.assign(CurrentContainer.style, { pointerEvents: "none" })
-        setTimeout(() => {
-          moveCard(dir * -25, 25)
-        }, 25)
+        setScrollMove(state => {
+          return { ...state, setPointer: false }
+        })
+      }
+      if (scrollMove.state && window.innerHeight * 0.4 > containerDetails.top) {
+        moveCard(dir * -25, 25)
         popout("120px")
         setTimeout(() => {
           moveCard(dir * 25, -25)
@@ -42,12 +49,14 @@ function ProductCard({ productInfo, circleStyle, dir }) {
           moveCard(0, 0)
           popout("0px")
           //Dont alllow this to happen more than once
-          setScrollMove(false)
-          //Enable all pointer events
+          setScrollMove(state => {
+            return { ...state, state: false }
+          })
         }, 800)
         setTimeout(() => {
+          //Enable all pointer events
           Object.assign(CurrentCard.style, {
-            transition: "0",
+            transition: "none",
             pointerEvents: "auto",
           })
           Object.assign(CurrentContainer.style, { pointerEvents: "auto" })
@@ -58,71 +67,63 @@ function ProductCard({ productInfo, circleStyle, dir }) {
     var product = document.querySelectorAll(`.${styles.img}`)[productInfo.num]
 
     const handleMouseMove = e => {
-      if (!scrollMove) {
-        let containerRect = container.current.getBoundingClientRect() //Get the rect to get top and height of container element
-        let xAxis = window.innerWidth / 2 - e.pageX //Get the posX of the cursor on the container from the center
-        let yAxis =
-          window.pageYOffset +
-          containerRect.top -
-          e.pageY +
-          containerRect.height / 2 //Get the posY of the cursor on the container from the center
-        //For the moving animation
-        moveCard(-xAxis / 25, yAxis / 25)
-        //For the moving animation
-        // Popout effect
-        popout("120px")
-        //Popout effect
-      }
+      let containerRect = container.current.getBoundingClientRect() //Get the rect to get top and height of container element
+      let xAxis = window.innerWidth / 2 - e.pageX //Get the posX of the cursor on the container from the center
+      let yAxis =
+        window.pageYOffset +
+        containerRect.top -
+        e.pageY +
+        containerRect.height / 2 //Get the posY of the cursor on the container from the center
+      //For the moving animation
+      moveCard(-xAxis / 25, yAxis / 25)
+      //For the moving animation
+      // Popout effect
+      popout("120px")
+      //Popout effect
     }
     // Move on phone
     const handleTouchMove = e => {
-      if (!scrollMove) {
-        e.preventDefault()
-        let containerRect = container.current.getBoundingClientRect() //Get the rect to get top and height of container element
-        let xAxis = window.innerWidth / 2 - e.changedTouches[0].pageX //Get the posX of the cursor on the container from the center
-        let yAxis =
-          window.pageYOffset +
-          containerRect.top -
-          e.changedTouches[0].pageY +
-          containerRect.height / 2 //Get the posY of the cursor on the container from the center
-        moveCard(-xAxis / 10, yAxis / 10)
-        popout("120px")
-      }
+      e.preventDefault()
+      let containerRect = container.current.getBoundingClientRect() //Get the rect to get top and height of container element
+      let xAxis = window.innerWidth / 2 - e.changedTouches[0].pageX //Get the posX of the cursor on the container from the center
+      let yAxis =
+        window.pageYOffset +
+        containerRect.top -
+        e.changedTouches[0].pageY +
+        containerRect.height / 2 //Get the posY of the cursor on the container from the center
+      moveCard(-xAxis / 10, yAxis / 10)
+      popout("120px")
 
       //   console.log(e.changedTouches[0].pageX, e.changedTouches[0].pageY)
     }
 
     // Disable any delay in movement of card on start
     const handleMouseEnter = () => {
-      !scrollMove && (card.current.style.transition = "none")
+      card.current.style.transition = "none"
     }
     const handleTouchStart = e => {
-      !scrollMove && (card.current.style.transition = "none")
+      card.current.style.transition = "none"
     }
     // Disable any delay in movement of card on start
 
     // Reset all animations to rest position
     const handleTouchEnd = e => {
-      if (!scrollMove) {
-        card.current.style.transition = "all 0.5s ease"
-        //Reset the card to initial pos(Without rotation)
-        moveCard(0, 0)
-        // Remove Popout effect
-        popout("0px")
-        //Remove Popout effect
-      }
+      card.current.style.transition = "all 0.5s ease"
+      //Reset the card to initial pos(Without rotation)
+      moveCard(0, 0)
+      // Remove Popout effect
+      popout("0px")
+      //Remove Popout effect
     }
 
     // Reset all animations to rest position
     const handleLeave = e => {
-      if (!scrollMove) {
-        card.current.style.transition = "all 0.5s ease"
-        //Reset the card to initial pos(Without rotation)
-        moveCard(0, 0)
-        // Remove Popout effect
-        popout("0px")
-        //Remove Popout effect
-      }
+      card.current.style.transition = "all 0.5s ease"
+      //Reset the card to initial pos(Without rotation)
+      moveCard(0, 0)
+      // Remove Popout effect
+      popout("0px")
+      //Remove Popout effect
     }
 
     window.addEventListener("scroll", handleScroll)

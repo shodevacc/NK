@@ -12,8 +12,8 @@
   text-align: center;
   z-index: 1;
 }
-.info h3{
-  font-family:royal1;
+.info h3 {
+  font-family: royal1;
 }
 .info p {
   margin: 10px 10px;
@@ -38,9 +38,8 @@
     padding: 200px 100px 200px 100px;
     background: #1f1e1e;
   }
-  
 }
-@media (min-width:768px){
+@media (min-width: 768px) {
   .bg {
     position: absolute;
     top: 50%;

@@ -1,11 +1,11 @@
 .cauldron {
-    width:165%;
+  width: 165%;
 }
 .cauldron #Fire {
   transform: translateX(100px);
 }
 .fire {
-  animation: burn .5s ease infinite alternate;
+  animation: burn 0.5s ease infinite alternate;
   /* transform: translateX(100px); */
 }
 
@@ -15,7 +15,7 @@
   }
 
   100% {
-    transform: scalex(1) scaley(1.05) translate(0%, -5%)
+    transform: scalex(1) scaley(1.05) translate(0%, -5%);
   }
 }
 .stick {
@@ -47,40 +47,40 @@
 }
 
 .smoke2 {
-    opacity: 0;
-    animation: rise2 2s ease-out .7s infinite;
-  }
-  
-  @keyframes rise2 {
-    0% {
-      transform: translate3d(0px, 0px, 0px);
-      opacity: 1;
-    }
-    100% {
-      transform: translate3d(0px, -70px, 0);
-      opacity: 0;
-    }
-  }
+  opacity: 0;
+  animation: rise2 2s ease-out 0.7s infinite;
+}
 
-  .smoke3 {
+@keyframes rise2 {
+  0% {
+    transform: translate3d(0px, 0px, 0px);
+    opacity: 1;
+  }
+  100% {
+    transform: translate3d(0px, -70px, 0);
     opacity: 0;
-    animation: rise3 2s ease-out .4s infinite;
   }
-  
-  @keyframes rise3 {
-    0% {
-      transform: translate3d(0px, 0px, 0px);
-      opacity: 1;
-    }
-    100% {
-      transform: translate3d(0px, -70px, 0);
-      opacity: 0;
-    }
-  }
+}
 
-  @media (min-width:768px){
-    .cauldron {
-        width:512px;
-         height:537px;
-    }
+.smoke3 {
+  opacity: 0;
+  animation: rise3 2s ease-out 0.4s infinite;
+}
+
+@keyframes rise3 {
+  0% {
+    transform: translate3d(0px, 0px, 0px);
+    opacity: 1;
   }
+  100% {
+    transform: translate3d(0px, -70px, 0);
+    opacity: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .cauldron {
+    width: 512px;
+    height: 537px;
+  }
+}
