@@ -3,6 +3,7 @@ import Showcase from "../components/Showcase"
 import About from "../components/About"
 import Intro from '../components/Intro'
 import ProductList from "../components/ProductList"
+import Testimonial from '../components/Testimonial'
 
 import Layout from "../components/layout"
 
@@ -34,7 +35,7 @@ const IndexPage = () => {
       {/* <ProductCard productInfo={products.chicken} />
         <ProductCard productInfo={products.mutton} /> */}
       {/* <Products products={products} /> */}
-    
+        <Testimonial/>
     </Layout>
   )
 }

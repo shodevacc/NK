@@ -1,0 +1,40 @@
+:root{
+    --testimonial-width:95vw;
+}
+.container{
+    background: #1f1e1e;
+    padding: 100px 0 50px 0;
+    margin: -110px 0 0 0;
+}
+.container h2{
+    color:white
+}
+.padding{
+    margin:0 auto;
+    width: var( --testimonial-width);
+    overflow: hidden;
+    border-radius: 20px;
+}
+.cardContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start; 
+}
+.buttons{
+    list-style: none;
+    margin: 10px auto;
+    width: var( --testimonial-width);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.buttons li{
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    background: red;
+    cursor: pointer;
+}

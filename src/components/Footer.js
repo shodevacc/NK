@@ -1,6 +1,6 @@
 import React from "react"
 // import { Instagram } from "../Images"
-// import { Insta, Facebook, Twitter } from "../SVG"
+import { Insta, Facebook, Twitter } from "../SVG"
 import styles from '../styles/footer.module.css'
 
 export default function Footer() {
@@ -12,14 +12,10 @@ export default function Footer() {
         </div>
         <ul className={styles.right}>
           <li>
-           INsta
+           <Insta/>
           </li>
           <li>
-            <i className="fab fa-facebook-f"></i>
-           Face
-          </li>
-          <li>
-           Twitter
+            <Facebook style={{height:'25px'}}/>
           </li>
         </ul>
       </div>
