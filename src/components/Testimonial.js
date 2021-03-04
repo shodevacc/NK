@@ -39,16 +39,54 @@ function Testimonial() {
     },
   ]
   const [index, setIndex] = useState(0)
+  const [touchPos, setTouchPos] = useState({ start: 0, stop: 0 })
 
   const props = useSpring({ transform: `translate3d(${index * -100}%,0,0)` })
   useEffect(() => {
+    const handleTouchStart = e => {
+      console.log("STart", e.changedTouches[0].clientX)
+      setTouchPos(state => {
+        return { ...state, start: e.changedTouches[0].clientX }
+      })
+    }
+    const handleTouchEnd = e => {
+      var TouchEnd = e.changedTouches[0].clientX
+      var distanceMoved = touchPos.start - TouchEnd
+      //If enough distance is moved to be registered as a touch stroke
+      if (Math.abs(distanceMoved) > 20) {
+        //If difference is -ve its a right stroke
+        if (distanceMoved < 0) {
+          setIndex(() =>
+            ((index - 1) < 0 ? details.length - 1 : index - 1)
+          )
+        } else {
+          setIndex(() => setIndex((index + 1) % details.length))
+        }
+      }
+      setTouchPos(state => {
+        return { ...state, stop: e.changedTouches[0].clientX }
+      })
+    }
     const timer = setInterval(() => {
       setIndex(() => setIndex((index + 1) % details.length))
     }, 3000)
+    document
+      .querySelector(`.${styles.cardContainer}`)
+      .addEventListener("touchstart", handleTouchStart)
+    document
+      .querySelector(`.${styles.cardContainer}`)
+      .addEventListener("touchend", handleTouchEnd)
     return () => {
       clearInterval(timer)
+      document
+        .querySelector(`.${styles.cardContainer}`)
+        .removeEventListener("touchstart", handleTouchStart)
+      document
+        .querySelector(`.${styles.cardContainer}`)
+        .removeEventListener("touchend", handleTouchEnd)
     }
   }, [index])
+
   return (
     <div className={styles.container}>
       <h2>Highlights</h2>
